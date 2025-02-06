@@ -97,4 +97,40 @@ const projects = [
     description: "A cross-platform mobile app for tracking workouts and nutrition.",
     technologies: ["React Native", "Firebase", "Redux", "Node.js"],
   },
+  {
+    title: "E-commerce Platform",
+    category: "web",
+    description: "A modern e-commerce platform built with Next.js and Stripe integration.",
+    technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
+  },
+  {
+    title: "AI Image Generator",
+    category: "ai",
+    description: "An AI-powered image generation tool using state-of-the-art models.",
+    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
+  },
+  {
+    title: "Fitness Tracker",
+    category: "mobile",
+    description: "A cross-platform mobile app for tracking workouts and nutrition.",
+    technologies: ["React Native", "Firebase", "Redux", "Node.js"],
+  },
+  {
+    title: "E-commerce Platform",
+    category: "web",
+    description: "A modern e-commerce platform built with Next.js and Stripe integration.",
+    technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind"],
+  },
+  {
+    title: "AI Image Generator",
+    category: "ai",
+    description: "An AI-powered image generation tool using state-of-the-art models.",
+    technologies: ["Python", "TensorFlow", "React", "FastAPI"],
+  },
+  {
+    title: "Fitness Tracker",
+    category: "mobile",
+    description: "A cross-platform mobile app for tracking workouts and nutrition.",
+    technologies: ["React Native", "Firebase", "Redux", "Node.js"],
+  },
 ]; 
