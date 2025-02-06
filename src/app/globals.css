@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --surface: #ffffff;
+  --text: #000000;
+  --text-secondary: #707579;
+  --button: #007aff;
+  --button-text: #ffffff;
+  --secondary-bg: #efeff3;
+  --secondary-bg-focused: #e5e5ea;
+  --header-bg: #f6f6f6;
+  --border: #e5e5ea;
+  --hint: #999999;
+  --link: #007aff;
+}
+
+:root[data-theme="dark"] {
+  --background: #000000;
+  --surface: #000000;
+  --text: #ffffff;
+  --text-secondary: #aaaaaa;
+  --button: #007aff;
+  --button-text: #ffffff;
+  --secondary-bg: #1c1c1d;
+  --secondary-bg-focused: #2c2c2e;
+  --header-bg: #1c1c1d;
+  --border: #2c2c2e;
+  --hint: #777777;
+  --link: #007aff;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text antialiased min-h-screen;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply w-full py-3.5 px-4 rounded-xl font-medium text-center text-base
+    bg-button text-button-text
+    disabled:opacity-60 disabled:cursor-not-allowed
+    active:opacity-80 select-none
+    transition-opacity;
+  }
+
+  .input {
+    @apply w-full px-4 py-3.5 rounded-xl text-base
+    bg-secondary-bg text-text
+    placeholder:text-hint
+    focus:outline-none focus:bg-[var(--secondary-bg-focused)]
+    transition-colors;
+  }
+
+  .card {
+    @apply bg-surface rounded-xl p-4 border border-border;
+  }
+
+  .header {
+    @apply sticky top-0 z-40 bg-header-bg backdrop-blur-lg border-b border-border px-4 py-2;
+  }
+}
+
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar { 
     display: none;
@@ -11,22 +74,4 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-}
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
