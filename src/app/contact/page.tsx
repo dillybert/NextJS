@@ -31,7 +31,7 @@ export default function Contact() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Have a question or want to work together? We'd love to hear from you.
+            Have a question or want to work together? We&apos;d love to hear from you.
           </p>
         </div>
 

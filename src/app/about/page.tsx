@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 export default function About() {
   return (
     <div className="w-full">
@@ -8,7 +6,7 @@ export default function About() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">About Us</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            We're a team of passionate developers and designers building the next generation of web applications.
+            We&apos;re a team of passionate developers and designers building the next generation of web applications.
           </p>
         </div>
 
@@ -16,8 +14,8 @@ export default function About() {
         <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-16">
           <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
           <p className="text-gray-600 dark:text-gray-300">
-            To create beautiful, performant, and accessible web applications that make a difference in people's lives.
-            We believe in pushing the boundaries of what's possible on the web while maintaining the highest standards
+            To create beautiful, performant, and accessible web applications that make a difference in people&apos;s lives.
+            We believe in pushing the boundaries of what&apos;s possible on the web while maintaining the highest standards
             of quality and user experience.
           </p>
         </div>

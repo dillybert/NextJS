@@ -16,7 +16,7 @@ export default function Projects() {
         <div className="text-center mb-16">
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Our Projects</h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore our latest work and see how we're pushing the boundaries of web development.
+            Explore our latest work and see how we&apos;re pushing the boundaries of web development.
           </p>
         </div>
 
