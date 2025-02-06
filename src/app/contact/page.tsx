@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { buttonClasses, inputClasses, headingClasses, textClasses, cardClasses } from '@/utils/telegram';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -11,18 +12,28 @@ export default function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setFormStatus('idle');
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', formData);
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsSubmitting(false);
-    alert('Thank you for your message! We will get back to you soon.');
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log('Form submitted:', formData);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormStatus('success');
+      
+      // Reset success message after 3 seconds
+      setTimeout(() => setFormStatus('idle'), 3000);
+    } catch {
+      setFormStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,119 +42,88 @@ export default function Contact() {
   };
 
   return (
-    <div className="w-full">
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-        {/* Header */}
-        <div className="text-center mb-8 sm:mb-16">
-          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">Contact Us</h1>
-          <p className="text-base sm:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-4 sm:px-0">
-            Have a question or want to work together? We&apos;d love to hear from you.
-          </p>
+    <div className="p-4 pb-16 space-y-6">
+      <div>
+        <h1 className={headingClasses.h1}>Contact Us</h1>
+        <p className={textClasses.secondary}>
+          Have a question? Send us a message.
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {['name', 'email', 'subject'].map((field) => (
+          <div key={field}>
+            <label 
+              htmlFor={field} 
+              className={`block ${textClasses.small} mb-1.5 capitalize`}
+            >
+              {field}
+            </label>
+            <input
+              type={field === 'email' ? 'email' : 'text'}
+              id={field}
+              name={field}
+              value={formData[field as keyof typeof formData]}
+              onChange={handleChange}
+              required
+              className={inputClasses}
+              placeholder={`Enter your ${field}`}
+            />
+          </div>
+        ))}
+        
+        <div>
+          <label htmlFor="message" className={`block ${textClasses.small} mb-1.5`}>
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            rows={4}
+            className={`${inputClasses} resize-none min-h-[100px]`}
+            placeholder="Type your message here"
+          />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-          {/* Contact Form */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl p-6 sm:p-8 order-2 lg:order-1 shadow-lg">
-            <h2 className="text-xl sm:text-2xl font-bold mb-6">Send us a message</h2>
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-y min-h-[120px]"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className={`w-full bg-blue-600 text-white py-4 sm:py-3 px-6 rounded-lg transition-colors relative
-                  ${isSubmitting ? 'bg-blue-400 cursor-not-allowed' : 'hover:bg-blue-700'}`}
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Sending...
-                  </span>
-                ) : (
-                  'Send Message'
-                )}
-              </button>
-            </form>
-          </div>
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className={buttonClasses}
+        >
+          {isSubmitting ? 'Sending...' : 'Send Message'}
+        </button>
 
-          {/* Contact Information */}
-          <div className="space-y-6 order-1 lg:order-2">
-            {contactInfo.map((item) => (
-              <div
-                key={item.title}
-                className="bg-white dark:bg-gray-800 rounded-xl p-6 flex items-start space-x-4 shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
-                    {item.icon}
-                  </div>
-                </div>
-                <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-white">{item.title}</h3>
-                  <p className="mt-2 text-gray-600 dark:text-gray-300">{item.content}</p>
-                </div>
-              </div>
-            ))}
+        {formStatus === 'success' && (
+          <div className="text-center text-[#34C759] text-sm mt-4">
+            Message sent successfully!
           </div>
-        </div>
-      </section>
+        )}
+        {formStatus === 'error' && (
+          <div className="text-center text-[#FF3B30] text-sm mt-4">
+            Failed to send message. Please try again.
+          </div>
+        )}
+      </form>
+
+      <div className="space-y-3">
+        {contactInfo.map((item) => (
+          <div
+            key={item.title}
+            className={`${cardClasses} flex items-center space-x-3`}
+          >
+            <div className="text-[#007AFF]">
+              {item.icon}
+            </div>
+            <div>
+              <h3 className={`${textClasses.base} font-medium`}>{item.title}</h3>
+              <p className={textClasses.secondary}>{item.content}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

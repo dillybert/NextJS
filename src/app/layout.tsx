@@ -6,8 +6,10 @@ import Navbar from "@/components/Navbar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MyApp - Modern Next.js Application",
-  description: "A beautiful Next.js application with multiple pages and modern design",
+  title: "Mobile App",
+  description: "A mobile-first web application",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
+  themeColor: "#FFFFFF",
 };
 
 export default function RootLayout({
@@ -17,11 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} bg-[#F2F2F7] text-[#000000] antialiased min-h-screen`}>
         <Navbar />
-        <div className="pt-16 min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+        <main className="max-w-[480px] mx-auto min-h-[calc(100vh-3rem)]">
           {children}
-        </div>
+        </main>
       </body>
     </html>
   );
